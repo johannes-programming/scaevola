@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>scaevola</title>
+
+    <link rel="stylesheet" href="https://www.johannes-programming.online/styles.css">
+
+    </head>
+    <body>
+        <h1>scaevola</h1>
+        <h2>Overview</h2>
+        <p>This project contains the <code>Scaevola</code> class which can be used as a base class to utilize its preset right-handed magic methods:
+            <code>__ge__</code>,
+            <code>__gt__</code>,
+            <code>__radd__</code>,
+            <code>__rand__</code>,
+            <code>__rdivmod__</code>,
+            <code>__rfloordiv__</code>,
+            <code>__rlshift__</code>,
+            <code>__rmatmul__</code>,
+            <code>__rmod__</code>,
+            <code>__rmul__</code>,
+            <code>__ror__</code>,
+            <code>__rpow__</code>,
+            <code>__rrshift__</code>,
+            <code>__rsub__</code>,
+            <code>__rtruediv__</code>,
+            <code>__rxor__</code>.
+        </p>
+        <h2>Example</h2>
+        <p>The <code>__radd__</code> magic method is defined as below. The others follow the same pattern.</p>
+        <pre><code class="language-python">
+def __radd__(self, other):
+    return type(self)(other) + self
+    </code></pre>
+        <h2>Installation</h2>
+        <script src="https://www.johannes-programming.online/install.js"></script>
+        <script>
+            insertSnippet('scaevola');
+        </script>
+        <h2>License</h2>
+        <p>This project is licensed under the MIT License.</p>
+        <h2>Links</h2>
+        <ul>
+            <li><a href="https://pypi.org/project/scaevola/#files">Download</a></li>
+            <li><a href="https://github.com/johannes-programming/scaevola">Source</a></li>
+        </ul>
+        <h2>Credits</h2>
+        <ul>
+            <li>Author: Johannes</li>
+            <li>Email: <a href="mailto:johannes-programming@mailfence.com">johannes-programming@mailfence.com</a></li>
+        </ul>
+        <p>Thank you for using <code>scaevola</code>!</p>
+    </body>
+</html>
