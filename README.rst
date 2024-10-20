@@ -35,6 +35,7 @@ This project is licensed under the MIT License.
 Links
 -----
 
+* `Documentation <https://pypi.org/project/scaevola/>`_
 * `Download <https://pypi.org/project/scaevola/#files>`_
 * `Source <https://github.com/johannes-programming/scaevola>`_
 
