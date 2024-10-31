@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>scaevola</title>
-
-    <link rel="stylesheet" href="https://www.johannes-programming.online/styles.css">
-
-    </head>
+    <head><title>scaevola</title> </head>
     <body>
         <div id="top"></div>
         <div id="overview">
@@ -34,18 +27,19 @@
         <div ="example">
             <h2>Example</h2>
             <p>The <code>__radd__</code> magic method is defined as below. The others follow the same pattern.</p>
-                <pre><code class="language-python">
+                <pre><code>
 def __radd__(self, other):
     return type(self)(other) + self
             </code></pre>
         </div>
         <div id="install"></div>
+        <div id="testing"></div>
         <div id="license"></div>
         <div id="links"></div>
         <div id="credits"></div>
         <script src="https://www.johannes-programming.online/script.js"></script>
         <script>
-            setupBasicProject('scaevola');
+            setupBasicProject();
         </script>
     </body>
 </html>
