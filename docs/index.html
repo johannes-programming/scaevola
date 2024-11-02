@@ -29,6 +29,7 @@
             <p>The <code>__radd__</code> magic method is defined as below. The others follow the same pattern.</p>
                 <pre><code>
 def __radd__(self, other):
+    '''Return other+self.'''
     return type(self)(other) + self
             </code></pre>
         </div>
