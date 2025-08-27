@@ -1,12 +1,12 @@
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = [
-    "setuptools>=61.0.0",
+    "setuptools>=61.0",
 ]
 
 [project]
 authors = [
-    { email = "johannes-programming@mailfence.com", name = "Johannes" },
+    { email = "johannes.programming@gmail.com", name = "Johannes" },
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -23,8 +23,8 @@ description = "This project provides a class with preset right handed magic meth
 keywords = []
 name = "scaevola"
 readme = "README.rst"
-requires-python = ">=3.8"
-version = "1.0.12"
+requires-python = ">=3.11"
+version = "1.0.14"
 
 [project.license]
 file = "LICENSE.txt"
