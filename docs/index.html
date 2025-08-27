@@ -23,7 +23,7 @@
                     <dt id="example">Example</dt>
                     <dd>
                         <p>The <code>__radd__</code> magic method is defined as below. The others follow the same pattern.</p>
-                        <pre class="block"><code>def __radd__(self, other: Any) -> Any:
+                        <pre class="block"><code>def __radd__(self: Self, other: Any) -> Any:
     "This magic method implements other+self."
     return type(self)(other) + self</code></pre>
                     </dd>
