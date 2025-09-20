@@ -1,0 +1,17 @@
+[operator]
+doc = "This magic method implements other%sself."
+
+[operator.symbols]
+add="+"
+and_="&"
+floordiv="//"
+lshift="<<"
+matmul="@"
+mod="%"
+mul="*"
+or_="|"
+pow="**"
+rshift=">>"
+sub="-"
+truediv="/"
+xor="^"

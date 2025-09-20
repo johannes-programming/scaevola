@@ -1,10 +1,11 @@
 import unittest
 
 from scaevola.core import Scaevola
+from typing import *
 
 
 class TestScaevolaDocstrings(unittest.TestCase):
-    def test_methods_have_docstrings(self):
+    def test_methods_have_docstrings(self:Self)->None:
         methods_to_check = [
             "__ge__",
             "__gt__",
@@ -27,7 +28,7 @@ class TestScaevolaDocstrings(unittest.TestCase):
         for name in methods_to_check:
             with self.subTest(method=name):
                 method = getattr(Scaevola, name, None)
-                self.assertTrue(method.__doc__.startswith("This magic method "))
+                self.assertTrue(method.__doc__.startswith("This magic method "), "doc=%r"%method.__doc__)
 
 
 if __name__ == "__main__":

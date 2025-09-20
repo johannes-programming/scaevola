@@ -1,6 +1,7 @@
 import unittest
 
 from scaevola.core import Scaevola
+from typing import *
 
 
 # Subclass of Scaevola to implement basic arithmetic and comparison operations
