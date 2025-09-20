@@ -1,10 +1,11 @@
 import unittest
+from typing import *
 
 from scaevola.core import Scaevola
 
 
 class TestScaevolaDocstrings(unittest.TestCase):
-    def test_methods_have_docstrings(self):
+    def test_methods_have_docstrings(self: Self) -> None:
         methods_to_check = [
             "__ge__",
             "__gt__",
@@ -25,15 +26,11 @@ class TestScaevolaDocstrings(unittest.TestCase):
         ]
 
         for name in methods_to_check:
-            method = getattr(Scaevola, name, None)
             with self.subTest(method=name):
-                self.assertIsNotNone(
-                    method.__doc__, f"Method {name} is missing a docstring"
-                )
-                self.assertGreater(
-                    len(method.__doc__.strip()),
-                    0,
-                    f"Method {name} has an empty docstring",
+                magic = getattr(Scaevola, name, None)
+                self.assertTrue(
+                    magic.__doc__.startswith("This magic method "),
+                    "doc=%r" % magic.__doc__,
                 )
 
 

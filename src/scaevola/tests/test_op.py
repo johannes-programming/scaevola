@@ -1,4 +1,5 @@
 import unittest
+from typing import *
 
 from scaevola.core import Scaevola
 
