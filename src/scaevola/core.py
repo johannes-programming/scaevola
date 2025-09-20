@@ -4,6 +4,9 @@ __all__ = ["Scaevola"]
 
 
 class Scaevola:
+
+    __slots__ = ()
+
     def __ge__(self: Self, other: Any) -> Any:
         "This magic method implements self>=other."
         return type(self)(other) <= self
