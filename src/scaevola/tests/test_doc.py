@@ -25,16 +25,9 @@ class TestScaevolaDocstrings(unittest.TestCase):
         ]
 
         for name in methods_to_check:
-            method = getattr(Scaevola, name, None)
             with self.subTest(method=name):
-                self.assertIsNotNone(
-                    method.__doc__, f"Method {name} is missing a docstring"
-                )
-                self.assertGreater(
-                    len(method.__doc__.strip()),
-                    0,
-                    f"Method {name} has an empty docstring",
-                )
+                method = getattr(Scaevola, name, None)
+                self.assertTrue(method.__doc__.startswith("This magic method "))
 
 
 if __name__ == "__main__":
