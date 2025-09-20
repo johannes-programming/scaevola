@@ -1,14 +1,16 @@
 import unittest
 from typing import *
 
-from scaevola.core import Scaevola
+from scaevola.core import AutoComplete
 
 
-class Foo(Scaevola):
+@AutoComplete()
+class Foo:
     __slots__ = ("x", "y")
 
 
-class Bar(Scaevola):
+@AutoComplete()
+class Bar:
     pass
 
 

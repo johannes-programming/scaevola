@@ -1,0 +1,27 @@
+[builtins]
+doc = "This magic method implements %s(self, other)."
+names = [
+    "divmod",
+    "pow",
+]
+
+[operator]
+doc = "This magic method implements self%sother."
+
+[operator.symbols]
+add = "+"
+and_ = "&"
+floordiv = "//"
+lshift = "<<"
+matmul = "@"
+mod = "%"
+mul = "*"
+or_ = "|"
+rshift = ">>"
+sub = "-"
+truediv = "/"
+xor = "^"
+
+[operator.rel]
+e = "="
+t = ""
