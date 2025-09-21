@@ -27,8 +27,8 @@ class TestScaevolaDocstrings(unittest.TestCase):
 
         for name in methods_to_check:
             with self.subTest(method=name):
-                method = getattr(Scaevola, name, None)
-                self.assertTrue(method.__doc__.startswith("This magic method "), "doc=%r"%method.__doc__)
+                magic = getattr(Scaevola, name, None)
+                self.assertTrue(magic.__doc__.startswith("This magic method "), "doc=%r"%magic.__doc__)
 
 
 if __name__ == "__main__":

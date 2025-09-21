@@ -1,7 +1,12 @@
-[operator]
-doc = "This magic method implements other%sself."
+[docs]
+operator = "This magic method implements other%sself."
+ge = "This magic method implements self>=other."
+gt = "This magic method implements self>other."
+rdivmod = "This magic method implements divmod(other, self)."
 
-[operator.symbols]
+
+
+[operator]
 add="+"
 and_="&"
 floordiv="//"

@@ -8,7 +8,7 @@ import tomllib
 from importlib import resources
 import types
 
-__all__ = ["AutoComplete", "Scaevola"]
+__all__ = ["Scaevola", "auto", "getfuncnames", "makefunc"]
 
 
 class Util(enum.Enum):
@@ -20,61 +20,58 @@ class Util(enum.Enum):
         text: str = resources.read_text("scaevola.core", "cfg.toml")
         ans: dict = tomllib.loads(text)
         return ans
-
-
-
-@dataclasses.dataclass
-class AutoComplete:
-    overwrites:bool = False
-    def __call__(self:Self, cls:type)->type:
-        funcs:list = self._getgenerals() + self._getspecials()
-        funcs.sort(key=self._sortkey)
-        f:types.FunctionType
-        for f in funcs:
-            if self.overwrites or not hasattr(cls, f.__name__):
-                setattr(cls, f.__name__, f)
-        return cls
     
+    @functools.cached_property
+    def funcdata(self:Self)->dict:
+        ans:dict = dict()
+        name:str
+        doc:str
+        inner:Callable
+        name="__ge__"
+        doc = self.data["docs"]["ge"]
+        inner = operator.le
+        ans[name] = dict(doc=doc, inner=inner)
+        name="__gt__"
+        doc = self.data["docs"]["gt"]
+        inner = operator.lt
+        ans[name] = dict(doc=doc, inner=inner)
+        name= "__rdivmod__"
+        doc = self.data["docs"]["rdivmod"]
+        inner = divmod
+        ans[name] = dict(doc=doc, inner=inner)
+        x:Any
+        y:Any
+        for x,y in self.data["operator"].items():
+            name = "__r%s__" % x.rstrip("_")
+            doc = self.data["docs"]["operator"] % y
+            inner = getattr(operator, x)
+            ans[name] = dict(doc=doc, inner=inner)
+        ans = dict(sorted(ans.items()))
+        return ans
+
+     
+def auto(cls:type)->type:
+    name:str
+    for name in getfuncnames():
+        if name not in cls.__dict__.keys():
+            makefunc(cls, name)
+    return cls
+   
+def getfuncnames() -> list[str]:
+    return list(Util.util.funcdata.keys())
     
-    @staticmethod
-    def _getgeneral(key:str, value:str)->types.FunctionType:
-        inner:Callable=getattr(operator, key)
-        def outer(self:Self, other:Any)->Any:
-            "test"
-            return inner(type(self)(other), self)
-        outer.__doc__ = Util.util.data["operator"]["doc"] % value
-        outer.__name__ = "__r%s__" % key.rstrip("_")
-        return outer
-    
-    @classmethod
-    def _getgenerals(cls:type) -> list:
-        ans:list=list()
-        args:tuple
-        for args in Util.util.data["operator"]["symbols"].items():
-            ans.append(cls._getgeneral(*args))
-        return ans 
+def makefunc(cls:type, name:str)->types.FunctionType:
+    inner:Callable = Util.util.funcdata[name]["inner"]
+    def outer(self:Self, other:Any)->Any:
+        "This docstring will be overwritten."
+        return inner(type(self)(other), self)
+    outer.__doc__ = Util.util.funcdata[name]["doc"]
+    outer.__module__ = cls.__module__
+    outer.__name__ = name
+    outer.__qualname__ = cls.__qualname__ + "." + name
+    setattr(cls, name, outer)
+    return outer
 
-    @staticmethod
-    def _getspecials() -> list:
-
-        def __ge__(self: Self, other: Any) -> Any:
-            "This magic method implements self>=other."
-            return type(self)(other) <= self
-
-        def __gt__(self: Self, other: Any) -> Any:
-            "This magic method implements self>other."
-            return type(self)(other) < self
-
-        def __rdivmod__(self: Self, other: Any) -> Any:
-            "This magic method implements divmod(other, self)."
-            return divmod(type(self)(other), self)
-        
-        return [__ge__, __gt__, __rdivmod__]
-    
-    @staticmethod
-    def _sortkey(value:types.FunctionType) -> str:
-        return value.__name__
-
-@AutoComplete(overwrites=True)
+@auto
 class Scaevola:
     pass
