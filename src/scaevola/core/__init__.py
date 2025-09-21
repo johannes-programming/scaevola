@@ -1,7 +1,5 @@
 from typing import *
 import operator
-import sys
-import dataclasses
 import enum
 import functools
 import tomllib
@@ -12,6 +10,7 @@ __all__ = ["Scaevola", "auto", "getfuncnames", "makefunc"]
 
 
 class Util(enum.Enum):
+    "This enum provides a singleton."
     util = None
 
     @functools.cached_property
@@ -23,6 +22,7 @@ class Util(enum.Enum):
     
     @functools.cached_property
     def funcdata(self:Self)->dict:
+        "This cached property holds the data for easy function making."
         ans:dict = dict()
         name:str
         doc:str
@@ -51,6 +51,7 @@ class Util(enum.Enum):
 
      
 def auto(cls:type)->type:
+    "This decorator implements all the righthand functions."
     name:str
     for name in getfuncnames():
         if name not in cls.__dict__.keys():
@@ -58,9 +59,11 @@ def auto(cls:type)->type:
     return cls
    
 def getfuncnames() -> list[str]:
+    "This function returns the names of all righthand functions."
     return list(Util.util.funcdata.keys())
     
 def makefunc(cls:type, name:str)->types.FunctionType:
+    "This function implements a certain righthand function."
     inner:Callable = Util.util.funcdata[name]["inner"]
     def outer(self:Self, other:Any)->Any:
         "This docstring will be overwritten."
