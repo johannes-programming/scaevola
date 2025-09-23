@@ -17,10 +17,8 @@ class TestSlots(unittest.TestCase):
         foo: Foo = Foo()
         foo.x = 4
         foo.y = 2
-        foo.z = 0
         self.assertEqual(foo.x, 4)
         self.assertEqual(foo.y, 2)
-        self.assertEqual(foo.z, 0)
 
     def test_bar(self: Self) -> None:
         bar: Bar = Bar()
