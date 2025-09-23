@@ -1,3 +1,4 @@
+import builtins
 import enum
 import functools
 import operator
@@ -20,35 +21,6 @@ class Util(enum.Enum):
         ans: dict = tomllib.loads(text)
         return ans
 
-    @functools.cached_property
-    def funcdata(self: Self) -> dict:
-        "This cached property holds the data for easy function making."
-        ans: dict = dict()
-        name: str
-        doc: str
-        inner: Callable
-        name = "__ge__"
-        doc = self.data["docs"]["ge"]
-        inner = operator.le
-        ans[name] = dict(doc=doc, inner=inner)
-        name = "__gt__"
-        doc = self.data["docs"]["gt"]
-        inner = operator.lt
-        ans[name] = dict(doc=doc, inner=inner)
-        name = "__rdivmod__"
-        doc = self.data["docs"]["rdivmod"]
-        inner = divmod
-        ans[name] = dict(doc=doc, inner=inner)
-        x: Any
-        y: Any
-        for x, y in self.data["operator"].items():
-            name = "__r%s__" % x.rstrip("_")
-            doc = self.data["docs"]["operator"] % y
-            inner = getattr(operator, x)
-            ans[name] = dict(doc=doc, inner=inner)
-        ans = dict(sorted(ans.items()))
-        return ans
-
 
 def auto(cls: type) -> type:
     "This decorator implements all the righthand functions."
@@ -61,18 +33,24 @@ def auto(cls: type) -> type:
 
 def getfuncnames() -> list[str]:
     "This function returns the names of all righthand functions."
-    return list(Util.util.funcdata.keys())
+    return list(Util.util.data.keys())
 
 
 def makefunc(cls: type, name: str) -> types.FunctionType:
     "This function implements a certain righthand function."
-    inner: Callable = Util.util.funcdata[name]["inner"]
+    funcname: str = Util.util.data[name]["func"]
+    module: Any
+    if Util.util.data[name].get("isbuiltin", False):
+        module = builtins
+    else:
+        module = operator
+    inner: Callable = getattr(module, funcname)
 
     def outer(self: Self, other: Any) -> Any:
         "This docstring will be overwritten."
         return inner(type(self)(other), self)
 
-    outer.__doc__ = Util.util.funcdata[name]["doc"]
+    outer.__doc__ = Util.util.data[name]["doc"]
     outer.__module__ = cls.__module__
     outer.__name__ = name
     outer.__qualname__ = cls.__qualname__ + "." + name
@@ -82,4 +60,4 @@ def makefunc(cls: type, name: str) -> types.FunctionType:
 
 @auto
 class Scaevola:
-    pass
+    __slots__ = ()
