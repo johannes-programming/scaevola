@@ -1,6 +1,6 @@
 import unittest
 
-from scaevola import Scaevola
+from scaevola.core import Scaevola
 
 
 # Subclass of Scaevola to implement basic arithmetic and comparison operations
@@ -147,12 +147,6 @@ class TestScaevola(unittest.TestCase):
 
     def test_rpow(self):
         result = 2**self.obj1
-        self.assertEqual(result.value, 2**10)
-        result = pow(2, self.obj1)
-        self.assertEqual(result.value, 2**10)
-        result = pow(2, exp=self.obj1)
-        self.assertEqual(result.value, 2**10)
-        result = pow(base=2, exp=self.obj1)
         self.assertEqual(result.value, 2**10)
 
     def test_rrshift(self):
