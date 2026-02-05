@@ -7,19 +7,22 @@ import types
 from importlib import resources
 from typing import *
 
+import setdoc
+
 __all__ = ["Scaevola", "auto", "getfuncnames", "makefunc"]
 
 
 class Util(enum.Enum):
     "This enum provides a singleton."
+
     util = None
 
     @functools.cached_property
     def data(self: Self) -> dict:
         "This cached property holds the cfg data."
-        text: str = resources.read_text("scaevola.core", "cfg.toml")
-        ans: dict = tomllib.loads(text)
-        return ans
+        text: str
+        text = resources.read_text("scaevola.core", "cfg.toml")
+        return tomllib.loads(text)
 
 
 def auto(cls: type) -> type:
@@ -38,22 +41,24 @@ def getfuncnames() -> list[str]:
 
 def makefunc(cls: type, name: str) -> types.FunctionType:
     "This function implements a certain righthand function."
-    funcname: str = Util.util.data[name]["func"]
+    funcname: str
+    inner: Callable
     module: Any
+    funcname = Util.util.data[name]["func"]
     if Util.util.data[name].get("isbuiltin", False):
         module = builtins
     else:
         module = operator
-    inner: Callable = getattr(module, funcname)
+    inner = getattr(module, funcname)
 
     def outer(self: Self, other: Any) -> Any:
         "This docstring will be overwritten."
         return inner(type(self)(other), self)
 
-    outer.__doc__ = Util.util.data[name]["doc"]
     outer.__module__ = cls.__module__
     outer.__name__ = name
     outer.__qualname__ = cls.__qualname__ + "." + name
+    setdoc.basic(outer)
     setattr(cls, name, outer)
     return outer
 
