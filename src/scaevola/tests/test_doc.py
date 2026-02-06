@@ -3,9 +3,13 @@ from typing import *
 
 from scaevola.core import Scaevola
 
+__all__=["TestScaevolaDocstrings"]
 
 class TestScaevolaDocstrings(unittest.TestCase):
     def test_methods_have_docstrings(self: Self) -> None:
+        magic:Any
+        methods_to_check:list[str]
+        name:str
         methods_to_check = [
             "__ge__",
             "__gt__",

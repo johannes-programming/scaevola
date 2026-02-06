@@ -1,68 +1,75 @@
 import builtins
-import enum
-import functools
 import operator
-import tomllib
-import types
-from importlib import resources
 from typing import *
 
 import setdoc
 
-__all__ = ["Scaevola", "auto", "getfuncnames", "makefunc"]
+__all__ = ["Scaevola"]
 
-
-class Util(enum.Enum):
-    "This enum provides a singleton."
-
-    util = None
-
-    @functools.cached_property
-    def data(self: Self) -> dict:
-        "This cached property holds the cfg data."
-        text: str
-        text = resources.read_text("scaevola.core", "cfg.toml")
-        return tomllib.loads(text)
-
-
-def auto(cls: type) -> type:
-    "This decorator implements all the righthand functions."
-    name: str
-    for name in getfuncnames():
-        if name not in cls.__dict__.keys():
-            makefunc(cls, name)
-    return cls
-
-
-def getfuncnames() -> list[str]:
-    "This function returns the names of all righthand functions."
-    return list(Util.util.data.keys())
-
-
-def makefunc(cls: type, name: str) -> types.FunctionType:
-    "This function implements a certain righthand function."
-    funcname: str
-    inner: Callable
-    module: Any
-    funcname = Util.util.data[name]["func"]
-    if Util.util.data[name].get("isbuiltin", False):
-        module = builtins
-    else:
-        module = operator
-    inner = getattr(module, funcname)
-
-    def outer(self: Self, other: Any) -> Any:
-        "This docstring will be overwritten."
-        return inner(type(self)(other), self)
-
-    outer.__module__ = cls.__module__
-    outer.__name__ = name
-    outer.__qualname__ = cls.__qualname__ + "." + name
-    setdoc.basic(outer)
-    setattr(cls, name, outer)
-    return outer
-
-
-@auto
 class Scaevola:
+
     __slots__ = ()
+
+    @setdoc.basic
+    def __ge__(self: Self, other: Any) -> Any:
+        return operator.le(type(self)(other), self)
+
+    @setdoc.basic
+    def __gt__(self: Self, other: Any) -> Any:
+        return operator.lt(type(self)(other), self)
+
+    @setdoc.basic
+    def __radd__(self: Self, other: Any) -> Any:
+        return operator.add(type(self)(other), self)
+
+    @setdoc.basic
+    def __rand__(self: Self, other: Any) -> Any:
+        return operator.and_(type(self)(other), self)
+
+    @setdoc.basic
+    def __rdivmod__(self: Self, other: Any) -> Any:
+        return builtins.divmod(type(self)(other), self)
+
+    @setdoc.basic
+    def __rfloordiv__(self: Self, other: Any) -> Any:
+        return operator.floordiv(type(self)(other), self)
+
+    @setdoc.basic
+    def __rlshift__(self: Self, other: Any) -> Any:
+        return operator.lshift(type(self)(other), self)
+
+    @setdoc.basic
+    def __rmatmul__(self: Self, other: Any) -> Any:
+        return operator.matmul(type(self)(other), self)
+
+    @setdoc.basic
+    def __rmod__(self: Self, other: Any) -> Any:
+        return operator.mod(type(self)(other), self)
+
+    @setdoc.basic
+    def __rmul__(self: Self, other: Any) -> Any:
+        return operator.mul(type(self)(other), self)
+
+    @setdoc.basic
+    def __ror__(self: Self, other: Any) -> Any:
+        return operator.or_(type(self)(other), self)
+
+    @setdoc.basic
+    def __rpow__(self: Self, other: Any) -> Any:
+        return operator.pow(type(self)(other), self)
+
+    @setdoc.basic
+    def __rrshift__(self: Self, other: Any) -> Any:
+        return operator.rshift(type(self)(other), self)
+
+    @setdoc.basic
+    def __rsub__(self: Self, other: Any) -> Any:
+        return operator.sub(type(self)(other), self)
+
+    @setdoc.basic
+    def __rtruediv__(self: Self, other: Any) -> Any:
+        return operator.truediv(type(self)(other), self)
+
+    @setdoc.basic
+    def __rxor__(self: Self, other: Any) -> Any:
+        return operator.xor(type(self)(other), self)
