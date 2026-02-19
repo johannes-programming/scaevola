@@ -29,15 +29,38 @@
                     <dd id="linksCorpus"></dd>
                     <dt id="install">Installation</dt>
                     <dd id="installCorpus"></dd>
-                    <dt id="example">Example</dt>
+                    <dt id="features">Features</dt>
                     <dd>
-                        <p>The <code>__radd__</code> magic method is defined as below. The others follow the same pattern.</p>
-                        <pre class="block"><code>def __radd__(self: Self, other: Any) -> Any:
+                        <dl class="heading4" version="1.0 1.1">
+                            <dt>class scaevola.Scaevola()</dt>
+                            <dd>
+                                <p>The <code>__radd__</code> magic method is defined as below. The others follow the same pattern.</p>
+                                <pre class="block"><code>def __radd__(self: Self, other: Any) -> Any:
     "This magic method implements other+self."
     return type(self)(other) + self</code></pre>
+                            </dd>
+                            <dt version="1.1">scaevola.auto(cls: type) -> type</dt>
+                            <dd version="1.1">
+                                <div class="minor minor-added">
+                                    <p><span>Added in version 1.1.</span></p>
+                                </div>
+                            </dd>
+                            <dt version="1.1">scaevola.getfuncnames() -> list[str]</dt>
+                            <dd version="1.1">
+                                <div class="minor minor-added">
+                                    <p><span>Added in version 1.1.</span></p>
+                                </div>
+                            </dd>
+                            <dt version="1.1">scaevola.makefunc(cls: type, name: str) -> types.FunctionType</dt>
+                            <dd version="1.1">
+                                <div class="minor minor-added">
+                                    <p><span>Added in version 1.1.</span></p>
+                                </div>
+                            </dd>
+                            <dt id="1--test">scaevola.test() -> unittest.TextTestResult</dt>
+                            <dd class="1--testingCorpus"></dd>
+                        </dl>
                     </dd>
-                    <dt id="testing">Testing</dt>
-                    <dd id="testingCorpus"></dd>
                     <dt id="license">License</dt>
                     <dd id="licenseCorpus"></dd>
                     <dt id="impressum">Impressum</dt>
