@@ -37,13 +37,20 @@
             </dd>
         </dl>
     </body>
-    <script src="https://www.johannes-programming.online/script.js"></script>
-    <script>
+    <script type="module">
+        import {
+            setupImpressumCorpus,
+            setupInstallCorpus,
+            setupLicenseCorpus,
+            setupLinksCorpus,
+            setupTestingCorpus,
+            addMetaAndLinkTags,
+        } from "https://www.johannes-programming.online/script.js";
+        setupImpressumCorpus("scaevola");
         setupInstallCorpus("scaevola");
-        setupTestingCorpus("scaevola");
         setupLicenseCorpus("scaevola");
         setupLinksCorpus("scaevola");
-        setupImpressumCorpus("scaevola");
+        setupTestingCorpus("scaevola");
         addMetaAndLinkTags();
     </script>
 </html>
