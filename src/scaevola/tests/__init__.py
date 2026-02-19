@@ -4,8 +4,8 @@ __all__ = ["test"]
 
 
 def test() -> unittest.TextTestResult:
+    loader: unittest.TestLoader
+    suite: unittest.TestSuite
     loader = unittest.TestLoader()
-    tests = loader.discover(start_dir="scaevola.tests")
-    runner = unittest.TextTestRunner()
-    result = runner.run(tests)
-    return result
+    suite = loader.discover(start_dir="scaevola.tests")
+    return unittest.TextTestRunner().run(suite)
