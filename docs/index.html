@@ -17,14 +17,6 @@
             </dt>
             <dd>
                 <dl class="heading1">
-                    <dt id="intro">Introduction</dt>
-                    <dd id="introCorpus">
-                        <p>
-                            This project contains the <code>Scaevola</code> class which can be used as a base class to utilize its preset right-handed magic methods: <code>__ge__</code>, <code>__gt__</code>, <code>__radd__</code>,
-                            <code>__rand__</code>, <code>__rdivmod__</code>, <code>__rfloordiv__</code>, <code>__rlshift__</code>, <code>__rmatmul__</code>, <code>__rmod__</code>, <code>__rmul__</code>, <code>__ror__</code>,
-                            <code>__rpow__</code>, <code>__rrshift__</code>, <code>__rsub__</code>, <code>__rtruediv__</code>, <code>__rxor__</code>.
-                        </p>
-                    </dd>
                     <dt id="links">Links</dt>
                     <dd id="linksCorpus"></dd>
                     <dt id="install">Installation</dt>
@@ -34,6 +26,11 @@
                         <dl class="heading4" version="1.0 1.1">
                             <dt>class scaevola.Scaevola()</dt>
                             <dd>
+                                <p>
+                                    This class can be used as a base class to utilize its preset right-handed magic methods: <code>__ge__</code>, <code>__gt__</code>, <code>__radd__</code>,
+                                    <code>__rand__</code>, <code>__rdivmod__</code>, <code>__rfloordiv__</code>, <code>__rlshift__</code>, <code>__rmatmul__</code>, <code>__rmod__</code>, <code>__rmul__</code>, <code>__ror__</code>,
+                                    <code>__rpow__</code>, <code>__rrshift__</code>, <code>__rsub__</code>, <code>__rtruediv__</code>, <code>__rxor__</code>.
+                                </p>
                                 <p>The <code>__radd__</code> magic method is defined as below. The others follow the same pattern.</p>
                                 <pre class="block"><code>def __radd__(self: Self, other: Any) -> Any:
     "This magic method implements other+self."
