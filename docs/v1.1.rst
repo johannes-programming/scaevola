@@ -1,0 +1,87 @@
+Links
+-----
+
+- Download: https://pypi.org/project/scaevola/#files
+- Index: https://pypi.org/project/scaevola/
+- Source: https://github.com/johannes-programming/scaevola/
+- Website: https://scaevola.johannes-programming.online/
+
+Installation
+------------
+
+To install scaevola, you can use pip. Open your terminal and run:
+
+.. code-block:: shell
+
+    pip install scaevola
+
+Features
+--------
+
+``class scaevola.Scaevola()``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This class can be used as a base class to utilize its preset right-handed magic methods: 
+``__ge__``,
+``__gt__``,
+``__radd__``,
+``__rand__``,
+``__rdivmod__``,
+``__rfloordiv__``,
+``__rlshift__``,
+``__rmatmul__``,
+``__rmod__``,
+``__rmul__``,
+``__ror__``,
+``__rpow__``,
+``__rrshift__``,
+``__rsub__``,
+``__rtruediv__``,
+``__rxor__``.
+
+The ``__radd__`` magic method is defined as below. The others follow the same pattern.
+
+.. code-block:: python
+
+    def __radd__(self: Self, other: Any) -> Any:
+        "This magic method implements other+self."
+        return type(self)(other) + self
+
+``scaevola.auto(cls: type) -> type``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. container:: versionadded
+    
+    **Added in version 1.1.**
+
+``scaevola.getfuncnames() -> list[str]``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. container:: versionadded
+    
+    **Added in version 1.1.**
+
+``scaevola.makefunc(cls: type, name: str) -> types.FunctionType``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. container:: versionadded
+    
+    **Added in version 1.1.**
+
+``scaevola.test() -> unittest.TextTestResult``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+License
+-------
+
+This project is licensed under the MIT License.
+
+Impressum
+---------
+
+**Johannes Programming**
+
+- Name: Johannes
+- Email: johannes.programming@gmail.com
+- Homepage: https://www.johannes-programming.online/
+- Gravatar: https://www.johannes-programming.fyi/
