@@ -51,6 +51,7 @@ This project can be tested through its test function.
 
 License
 -------
+
 This project is licensed under the MIT License.
 
 Links
